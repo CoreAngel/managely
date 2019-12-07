@@ -1,28 +1,27 @@
-package com.coreangel.managely.account;
+package com.coreangel.managely.model;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Builder
 @Getter
+@Setter
 @Entity
+@Table(name = "account")
 public class Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
     private String email;
     private String login;
     private String password;
-    @ManyToMany
-    @JoinTable(
-            name = "account_role",
-            joinColumns = @JoinColumn(name = "account_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
+
+    @OneToMany
     private Set<Role> roles;
 
     public void addRole(AccountRole role) {
