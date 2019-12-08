@@ -1,17 +1,17 @@
 package com.coreangel.managely.model;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Builder
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "account")
+@Table(name = "accounts")
 public class Account {
 
     @Id
@@ -21,8 +21,13 @@ public class Account {
     private String login;
     private String password;
 
-    @OneToMany
-    private Set<Role> roles;
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "account_role",
+            joinColumns = { @JoinColumn(name = "accounts_id") },
+            inverseJoinColumns = { @JoinColumn(name = "roles_id") }
+    )
+    private final Set<Role> roles = new HashSet<>();
 
     public void addRole(AccountRole role) {
         if (role != null) {
