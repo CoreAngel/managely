@@ -22,14 +22,8 @@ public class AccountService {
     @Transactional
     public Optional<Account> createAccount(Account account) {
         if (!this.isAccountExistWithLogin(account)) {
-            Account hashedAccount = Account.builder().
-                    email(account.getEmail())
-                    .login(account.getLogin())
-                    .roles(account.getRoles())
-                    .password(BCrypt.hashpw(account.getPassword(), BCrypt.gensalt()))
-                    .build();
-
-            return Optional.of(this.repository.save(hashedAccount));
+            account.setPassword(BCrypt.hashpw(account.getPassword(), BCrypt.gensalt()));
+            return Optional.of(this.repository.save(account));
         }
 
         return Optional.empty();
