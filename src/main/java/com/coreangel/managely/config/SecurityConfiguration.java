@@ -48,7 +48,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/auth/**").permitAll()
                 .antMatchers("/api/**").hasAnyAuthority(AccountRole.USER.toString())
-                .anyRequest().authenticated().and()
+                .and()
                 .addFilterBefore(new JwtTokenAuthenticationFilter(secrets, jwtTokenUtil, detailsService), BasicAuthenticationFilter.class);
     }
 
