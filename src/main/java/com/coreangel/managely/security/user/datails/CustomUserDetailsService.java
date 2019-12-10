@@ -2,11 +2,9 @@ package com.coreangel.managely.security.user.datails;
 
 import com.coreangel.managely.model.Account;
 import com.coreangel.managely.service.AccountService;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 

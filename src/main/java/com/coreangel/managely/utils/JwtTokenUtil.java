@@ -21,7 +21,6 @@ public class JwtTokenUtil {
 
     @Autowired
     public JwtTokenUtil(SecretsConfigurationValueService secretsService) {
-        System.out.println(secretsService);
         this.secretsService = secretsService;
     }
 
@@ -59,7 +58,6 @@ public class JwtTokenUtil {
     }
 
     private String doGenerateToken(Map<String, Object> claims, String subject) {
-        System.out.println(this.secretsService.getJwtSecret());
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(subject)

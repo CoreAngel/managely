@@ -1,7 +1,6 @@
 package com.coreangel.managely.service;
 
 import com.coreangel.managely.model.Account;
-import com.coreangel.managely.model.Role;
 import com.coreangel.managely.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
