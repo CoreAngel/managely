@@ -1,13 +1,15 @@
 package com.coreangel.managely.model;
 
 import lombok.*;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @Builder
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -35,5 +37,9 @@ public class Account {
             roleEntity.setRole(role);
             roles.add(roleEntity);
         }
+    }
+
+    public boolean isPasswordMatch(String password) {
+        return BCrypt.checkpw(password, this.password);
     }
 }

@@ -1,6 +1,7 @@
 package com.coreangel.managely.service;
 
 import com.coreangel.managely.model.Account;
+import com.coreangel.managely.model.Role;
 import com.coreangel.managely.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -29,7 +30,6 @@ public class AccountService {
         return Optional.empty();
     }
 
-    @Transactional
     public boolean updateAccount(Account account) {
         Optional<Account> optAccount = this.findAccountById(account.getId());
 
@@ -41,19 +41,24 @@ public class AccountService {
         return false;
     }
 
-    @Transactional
     public void deleteAccount(long id) {
         this.repository.deleteById(id);
     }
 
-    @Transactional
     public boolean isAccountExistWithLogin(Account account) {
-        return this.repository.findAccountByLogin(account.getLogin()).isPresent();
+        return this.findAccountByLogin(account.getLogin()).isPresent();
     }
 
-    @Transactional
     public Optional<Account> findAccountById(long id) {
         return this.repository.findById(id);
+    }
+
+    public Optional<Account> findAccountByLogin(String login) {
+        return this.repository.findAccountByLogin(login);
+    }
+
+    public Optional<Account> findAccountByLoginWithRolesLoaded(String login) {
+        return this.repository.findAccountByLoginWithRole(login);
     }
 
 }

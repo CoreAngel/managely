@@ -8,10 +8,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-@Data
-@Entity
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 @Table(name = "roles")
 public class Role {
 

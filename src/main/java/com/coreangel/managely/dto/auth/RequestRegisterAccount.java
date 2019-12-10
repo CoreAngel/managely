@@ -16,6 +16,7 @@ public class RequestRegisterAccount {
     private final String email;
 
     @NotNull(message = "Password cannot be empty")
+    @Size(min = 6, max = 36, message = "Password length must be between 6 and 36 characters")
     private final String password;
 
     @NotNull(message = "Repeat password cannot be empty")
